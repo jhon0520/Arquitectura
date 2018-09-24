@@ -17,8 +17,8 @@ void draw() {
   if(cam.available()) {
     cam.read();
     image(cam, 0, 0);
-    int brightestX = 0, brightestX2=0, brightestX3=0  ; // X-coordinate of the brightest video pixel
-    int brightestY = 0, brightestY2=0, brightestY3=0; // Y-coordinate of the brightest video pixel
+    int brightestX = 0, brightestX2=0, brightestX3=0, brightestX4=0; // X-coordinate of the brightest video pixel
+    int brightestY = 0, brightestY2=0, brightestY3=0, brightestY4=0; // Y-coordinate of the brightest video pixel
     float brightestValue = 0, brightestValue2=0, brightestValue3=0, brightestValue4=0; // Brightness of the brightest video pixel
     // Search for the brightest pixel: For each row of pixels in the video image and
     // for each pixel in the yth row, compute each pixel's index in the video
@@ -45,36 +45,23 @@ void draw() {
           brightestX= x;
           }
           
-        if (pixelBrightness > brightestValue2 && pixelBrightness != brightestValue) {
+        if (pixelBrightness > brightestValue2 && pixelBrightness != brightestValue &&  (brightestY2 > brightestY+25) &&  (brightestX2 > brightestX+25)) {
           brightestValue2 = pixelBrightness;
           brightestY2 = y;
           brightestX2= x;
           }
           
-          if (pixelBrightness > brightestValue3 && pixelBrightness != brightestValue && pixelBrightness != brightestValue2) {
+         if (pixelBrightness > brightestValue3 && pixelBrightness != brightestValue && pixelBrightness != brightestValue2) {
           brightestValue3 = pixelBrightness;
           brightestY3 = y;
           brightestX3= x;
           }
-         
-         //if (pixelBrightness != brightestValue) {
-         // brightestValue2 = pixelBrightness;
-         // }
-         //if (pixelBrightness != brightestValue2) {
-         // brightestValue3 = pixelBrightness;
-         // brightestY2 = y;
-         // brightestX2= x;
-         // }
-         
-         //if (pixelBrightness != brightestValue3) {
-         // brightestValue4 = pixelBrightness;
-         // }
-         //if (pixelBrightness != brightestValue4 && brightestValue4 != brightestValue3) {
-         // brightestValue4 = pixelBrightness;
-         // brightestY3 = y;
-         // brightestX3= x;
-         // } 
-                  
+         if (pixelBrightness > brightestValue4 && pixelBrightness != brightestValue && pixelBrightness != brightestValue2 && pixelBrightness != brightestValue3) {
+          brightestValue4 = pixelBrightness;
+          brightestY4 = y;
+          brightestX4= x;
+          }
+          
         index++;
       }
     }
@@ -85,6 +72,8 @@ void draw() {
     ellipse(brightestX2, brightestY2, 20, 20);
     fill(0, 0, 255, 128);
     ellipse(brightestX3, brightestY3, 20, 20);
+    fill(125, 0, 255, 128);
+    ellipse(brightestX4, brightestY4, 20, 20);
   }
 }
 
